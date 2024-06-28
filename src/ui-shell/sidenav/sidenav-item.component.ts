@@ -18,23 +18,31 @@ import { Router } from "@angular/router";
 	selector: "cds-sidenav-item, ibm-sidenav-item",
 	template: `
 		<a *ngIf="!useRouter; else sidenavItemRouterTpl"
-		   class="cds--side-nav__link"
-		   [ngClass]="{
+			class="cds--side-nav__link"
+			[ngClass]="{
 				'cds--side-nav__item--active': active
 			}"
-		   [href]="href"
-		   [attr.aria-current]="(active ? 'page' : null)"
-		   [attr.title]="title ? title : null"
-		   (click)="navigate($event)">
+			[href]="href"
+			[attr.aria-current]="(active ? 'page' : null)"
+			[attr.title]="title ? title : null"
+			(click)="navigate($event)">
 			<ng-template [ngTemplateOutlet]="sidenavItemContentTpl"></ng-template>
 		</a>
 
 		<ng-template #sidenavItemRouterTpl>
 			<a
+				[attr.title]="title ? title : null"
 				[routerLink]="route"
+ 				[relativeTo]="routeExtras?.relativeTo"
+				[queryParams]="routeExtras?.queryParams"
+				[fragment]="routeExtras?.fragment"
+				[queryParamsHandling]="routeExtras?.queryParamsHandling"
+				[preserveFragment]="routeExtras?.preserveFragment"
+				[skipLocationChange]="routeExtras?.skipLocationChange"
+				[replaceUrl]="routeExtras?.replaceUrl"
+				[state]="routeExtras?.state"
 				routerLinkActive="cds--side-nav__item--active"
 				ariaCurrentWhenActive="page"
-				[attr.title]="title ? title : null"
 				class="cds--side-nav__link">
 				<ng-template [ngTemplateOutlet]="sidenavItemContentTpl"></ng-template>
 			</a>
